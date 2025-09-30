@@ -1,0 +1,95 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Client Risk Assessment Form</title>
+<style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .form-section { display: none; }
+        .form-section.active { display: block; }
+        .progress-bar { width: 100%; background-color: #f3f3f3; border-radius: 5px; margin-bottom: 20px; }
+        .progress { height: 20px; background-color: #4CAF50; width: 0%; border-radius: 5px; }
+        button { padding: 10px 20px; margin-top: 20px; }
+        .question { margin-bottom: 15px; }
+    </style>
+</head>
+<body>
+<h1>Client Risk Assessment</h1>
+<div class="progress-bar"><div class="progress" id="progress"></div></div>
+<form action="https://formsubmit.co/jesse.palmer@countryfinancial.com" id="riskForm" method="POST">
+<div class="form-section active">
+<h2>1. Basic Client Info</h2>
+<div class="question"><label>Name: <input name="name" type="text"/></label></div>
+<div class="question"><label>Age: <input name="age" type="number"/></label></div>
+<div class="question"><label>Marital Status: <select name="marital"><option>Single</option><option>Married</option><option>Divorced</option></select></label></div>
+<div class="question"><label>Dependents: <input name="dependents" type="number"/></label></div>
+<div class="question"><label>Occupation: <input name="occupation" type="text"/></label></div>
+<div class="question"><label>Employer: <input name="employer" type="text"/></label></div>
+</div>
+<div class="form-section">
+<h2>2. Household Financial Snapshot</h2>
+<div class="question"><label>Annual Income: <select name="income"><option>&lt;$50k</option><option>$50k-$100k</option><option>$100k-$200k</option><option>&gt;$200k</option></select></label></div>
+<div class="question"><label>Total Debt: <input name="debt" type="number"/></label></div>
+<div class="question"><label>Monthly Savings Rate (%): <input name="savings" type="number"/></label></div>
+</div>
+<div class="form-section">
+<h2>3. Liability Exposure</h2>
+<div class="question"><label>Property Ownership: <select name="property"><option>None</option><option>Home</option><option>Rental</option><option>Farm</option></select></label></div>
+<div class="question"><label>Teenage Drivers or High-Value Vehicles: <select name="vehicles"><option>Yes</option><option>No</option></select></label></div>
+<div class="question"><label>Recreational Vehicles or Event Hosting: <select name="recreation"><option>Yes</option><option>No</option></select></label></div>
+</div>
+<div class="form-section">
+<h2>4. Life Insurance Needs</h2>
+<div class="question"><label>Do you have life insurance? <select name="life_insurance"><option>Yes</option><option>No</option></select></label></div>
+<div class="question"><label>Total Coverage Amount: <input name="coverage" type="number"/></label></div>
+<div class="question">Coverage Goals:<br/>
+<label><input name="goals" type="checkbox" value="Income replacement"/> Income replacement</label><br/>
+<label><input name="goals" type="checkbox" value="Mortgage payoff"/> Mortgage payoff</label><br/>
+<label><input name="goals" type="checkbox" value="Children’s education"/> Children’s education</label><br/>
+<label><input name="goals" type="checkbox" value="Final expenses"/> Final expenses</label><br/>
+<label><input name="goals" type="checkbox" value="Business continuity"/> Business continuity</label>
+</div>
+</div>
+<div class="form-section">
+<h2>5. Retirement &amp; Investment Accounts</h2>
+<div class="question"><label>Contribute to retirement accounts? <select name="retirement"><option>Yes</option><option>No</option></select></label></div>
+<div class="question"><label>Have investment accounts? <select name="investment"><option>Yes</option><option>No</option></select></label></div>
+<div class="question"><label>Would you like help reviewing these accounts? <select name="review"><option>Yes</option><option>No</option></select></label></div>
+</div>
+<div class="form-section">
+<h2>6. Goals &amp; Concerns</h2>
+<div class="question">Top 2 Financial Priorities:<br/>
+<label><input name="priorities" type="checkbox" value="Protecting family"/> Protecting family</label><br/>
+<label><input name="priorities" type="checkbox" value="Saving for retirement"/> Saving for retirement</label><br/>
+<label><input name="priorities" type="checkbox" value="Reducing taxes"/> Reducing taxes</label><br/>
+<label><input name="priorities" type="checkbox" value="Building wealth"/> Building wealth</label><br/>
+<label><input name="priorities" type="checkbox" value="Paying off debt"/> Paying off debt</label>
+</div>
+<div class="question"><label>Major life changes expected? <input name="life_changes" type="text"/></label></div>
+<div class="question"><label>Would you like to meet with a financial advisor? <select name="advisor"><option>Yes</option><option>No</option></select></label></div>
+</div>
+<button onclick="nextSection()" type="button">Next</button>
+<input name="_next" type="hidden" value="https://yourwebsite.com/thank-you.html"/><input name="_captcha" type="hidden" value="false"/></form>
+<script>
+        let currentSection = 0;
+        const sections = document.querySelectorAll('.form-section');
+        const progress = document.getElementById('progress');
+
+        function nextSection() {
+            sections[currentSection].classList.remove('active');
+            currentSection++;
+            if (currentSection < sections.length) {
+                sections[currentSection].classList.add('active');
+                progress.style.width = ((currentSection + 1) / sections.length * 100) + '%';
+                if (currentSection === sections.length - 1) {
+                    document.querySelector('button').textContent = 'Submit';
+                }
+            } else {
+                alert('Form submitted!');
+            }
+        }
+    </script>
+</body>
+</html>
